@@ -1,0 +1,48 @@
+/**
+.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+	background-color: #efffff;
+}
+*/
+
+.grid-content {
+    margin-left: 0px;
+}
+
+.table-bzMuliDayReport {
+	min-width: 260px;
+}
+
+.table-striped>tbody>tr.group-summary td {
+	background-color: #efffff;	
+}
+
+.table-striped>tbody>tr>td.group-field {
+	width: 50px;
+}
+
+.subtotal-text {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.form-horizontal .control-label, .form-horizontal .form-control {
+	float: left;
+}
+
+.search-area {
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+.form-group .input-group {
+	width: 66% !important;
+}
+
+.form-horizontal .row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.btn-default {
+	min-width: 120px;
+}

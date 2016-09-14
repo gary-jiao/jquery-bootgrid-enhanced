@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>jquery-bootgrid-enhanced</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/jquery.bootgrid.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker3.standalone.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <div id="wrapper">		
+      <div id="page-wrapper">
+        <div class="row col-lg-12">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i>Test Report</h3>
+                <!--h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Test Result</h3-->
+              </div>
+              <div class="search-area col-lg-12">
+              	<form class="form-horizontal">
+              		<div class="row col-lg-3">
+		              	<div class="form-group">
+			            	<label class="control-label col-md-4">Date</label>
+			            	<div class="input-group date col-md-8">
+							  <input type="text" id="queryDate" name="queryDate" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+							</div>
+			            	<div class="clearfix"></div>
+			            </div>
+		            </div>
+		            <div class="row col-lg-3">
+			            <button type="button" class="btn btn-default">Search</button>
+		            </div>
+		            <div class="clearfix"></div>
+		        </form>		        
+              </div>
+              <div class="panel-body">
+                <div class="grid-content">
+					<table id="grid-command-buttons" class="table table-condensed table-hover table-striped table-bzMuliDayReport">
+						<thead>
+							<tr>
+								<th data-column-id="catalog" data-width="50px"></th>
+								<th data-column-id="name">Name</th>
+								<th data-column-id="salary" data-type="numeric">Salary</th>
+								<th data-column-id="bonus" data-type="numeric">Bouns</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+              </div>
+            </div>
+        </div><!-- /.row -->
+      </div><!-- /#page-wrapper -->
+    </div><!-- /#wrapper -->
+    <!-- JavaScript -->
+	<script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap-3.0.2.js"></script>
+    <script src="js/jquery.bootgrid.js"></script>
+    <script src="js/jquery.bootgrid.fa.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script src="js/jquery.serialize-object.js"></script>
+    <script>
+    $(function() {
+	    var grid = $("#grid-command-buttons").bootgrid({
+	        ajax: true,
+	        rowCount: -1,
+	        templates: {
+	        	header: '',
+	        	footer: ''
+	        },
+	        url: "data/data.json",
+	        queryTrigger: function(grid, searchFunc) {
+	        	$('.btn-default').bind('click', function(e) {
+		            searchFunc.call(grid, $('#queryDate').val());
+		        });
+	        },
+	        queryCriterias: function() {
+	        	return $('.form-horizontal').serializeObject();
+	        },
+	        grouping: true,
+	        groupingView: {
+	        	groupField: 'catalog',
+	        	calculateFields: ['salary', 'bonus'],
+	            groupText: "<span class=\"subtotal-text\">小计</span>",
+	            groupShowField: 'catalog',
+	            groupSummary: true,
+	            groupCssClass: '',
+	            showTotalSummary: true
+	        }
+	    });
+	    $('.form-group .input-group.date').datepicker({
+	    	format: 'yyyy-mm-dd',
+	    	language: "zh-CN",
+	    	autoclose: true,
+	    	todayHighlight: true
+		});
+	});
+
+	</script>
+  </body>
+</html>
+
+   
