@@ -10,7 +10,7 @@ jquery-bootgrid自带的查询是一个输入框，但对于复杂查询貌似�
 #主要改动
 ##增加分组小结汇总功能
 主要是增加了以下参数：
-```
+```javascript
 grouping: true,			//是否开启分组显示功能
 groupingView: {
 	groupField: 'catalog',		//根据哪个字段进行分组，目前只支持单个字段
@@ -25,7 +25,7 @@ groupingView: {
 
 ##增加查询条件
 主要增加以下配置选项：
-```
+```javascript
 queryTrigger: function(grid, searchFunc) {
 	$('.btn-default').bind('click', function(e) {
         searchFunc.call(grid, $('#queryDate').val());	
