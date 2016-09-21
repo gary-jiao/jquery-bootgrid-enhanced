@@ -344,8 +344,13 @@
                 }
             };
             settings = $.extend(this.options.ajaxSettings, settings);
-
-            this.xqr = $.ajax(settings);
+			//if jsonData is not defined, then will call remote url
+			if (this.options.jsonData == undefined)	{
+				this.xqr = $.ajax(settings);
+			} else {
+				//will render the table using jsonData
+				settings.success(this.options.jsonData);
+			}
         }
         else
         {

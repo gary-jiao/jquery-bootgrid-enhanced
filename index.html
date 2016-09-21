@@ -54,6 +54,16 @@
 							</tr>
 						</thead>
 					</table>
+					<table id="grid-command-buttons2" class="table table-condensed table-hover table-striped table-bzMuliDayReport">
+						<thead>
+							<tr>
+								<th data-column-id="catalog">Catalog</th>
+								<th data-column-id="name">Name</th>
+								<th data-column-id="salary" data-type="numeric">Salary</th>
+								<th data-column-id="bonus" data-type="numeric">Bouns</th>
+							</tr>
+						</thead>
+					</table>
 				</div>
               </div>
             </div>
@@ -97,6 +107,47 @@
 	            showTotalSummary: true
 	        }
 	    });
+
+		$("#grid-command-buttons2").bootgrid({
+	        ajax: true,
+	        rowCount: -1,
+	        templates: {
+	        	header: '',
+	        	footer: ''
+	        },
+			jsonData: {
+				"current": 1,
+				"rowCount": -1,
+				"total": 9248,
+				"rows": [
+					{
+						"id": "389",
+						"name": "咖啡吧",
+						"salary": "123.22",
+						"bonus": "10.23",
+						"catalog": "消费明细",
+						"act_date": "2015-12-22"
+					},
+					{
+						"id": "390",
+						"name": "啤酒吧",
+						"salary": "231.00",
+						"bonus": "22.33",
+						"catalog": "消费明细",
+						"act_date": "2015-12-23"
+					},
+					{
+						"id": "391",
+						"name": "现金",
+						"salary": "347.00",
+						"bonus": "2942.90",
+						"catalog": "收款明细",
+						"act_date": "2016-09-07 13:51:58"
+					}]
+			},
+			url: 'anything'		//因为bootgrid组件自身的要求，ajax为true时，必须指定url，在改造的时候，这个限制条件没有去除，所以如果指定了jsonData的数据，这里随便什么值都可以
+	    });
+
 	    $('.form-group .input-group.date').datepicker({
 	    	format: 'yyyy-mm-dd',
 	    	language: "zh-CN",
