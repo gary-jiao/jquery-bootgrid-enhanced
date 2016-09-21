@@ -60,7 +60,6 @@
         if (this.options.queryCriterias) {
             $.extend(request, this.options.queryCriterias());
         }
-        console.log(request);
 
         post = ($.isFunction(post)) ? post() : post;
         return this.options.requestHandler($.extend(true, request, post));
@@ -89,8 +88,8 @@
         renderSearchField.call(this);
         renderActions.call(this);
         loadData.call(this);
-
-        this.options.queryTrigger(this, executeSearch);
+	
+        if (this.options.queryTrigger) this.options.queryTrigger(this, executeSearch);
 
         this.element.trigger("initialized" + namespace);
     }
@@ -230,6 +229,24 @@
             }
         }
 
+		function getGroupSummaryRow(groupSummaries, groupFieldValue) {
+			var groupOpts = that.options.groupingView;
+			var data = {};
+			data[groupOpts.groupShowField] = groupOpts.groupText;
+			data.isSummary = true;
+			$.each(groupSummaries[groupFieldValue], function(item) {
+				groupSummaries[groupFieldValue][item] = groupSummaries[groupFieldValue][item].toFixed(2);
+			});
+			$.extend(data, groupSummaries[groupFieldValue]);
+			return data;
+		}
+
+		function getGroupHeaderRow(groupFieldValue) {
+			var data = {};
+            data.groupHeader = groupFieldValue;
+			return data;
+		}
+
         function calcuateTotalSummary(groupSummaries) {
 
         }
@@ -277,27 +294,19 @@
                             var gpFdValue = row[groupOpts.groupField];
                             
                             if (groupFieldValue == '') {
-                                var data = {};
-                                data.groupHeader = gpFdValue;
-                                rows.push(data);
+                                rows.push(getGroupHeaderRow(gpFdValue));
 
                                 initGroupSummary(groupSummaries, gpFdValue);
 
                                 groupFieldValue = gpFdValue;
                             } else if (gpFdValue != groupFieldValue) {
                                 //calculate current group's summary
-                                var data = {};
-                                data[groupOpts.groupShowField] = groupOpts.groupText;
-                                data.isSummary = true;
-                                $.extend(data, groupSummaries[groupFieldValue]);
-                                rows.push(data);
+                                rows.push(getGroupSummaryRow(groupSummaries, groupFieldValue));
 
                                 initGroupSummary(groupSummaries, gpFdValue);
 
                                 //add next group header
-                                data = {};
-                                data.groupHeader = gpFdValue;
-                                rows.push(data);
+                                rows.push(getGroupHeaderRow(gpFdValue));
 
                                 groupFieldValue = gpFdValue;
                             }
@@ -313,11 +322,7 @@
 
                             rows.push(row);
                         });
-                        var data = {};
-                        data[groupOpts.groupShowField] = groupOpts.groupText;
-                        data.isSummary = true;
-                        $.extend(data, groupSummaries[groupFieldValue]);
-                        rows.push(data);
+                        rows.push(getGroupSummaryRow(groupSummaries, groupFieldValue));
 
                         //if (groupOpts.showTotalSummary)
                         //     rows.push(calcuateTotalSummary(groupSummaries));
