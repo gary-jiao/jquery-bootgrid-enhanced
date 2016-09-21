@@ -29,7 +29,8 @@ groupingView: {
 queryTrigger: function(grid, searchFunc) {
 	$('.btn-default').bind('click', function(e) {
         searchFunc.call(grid, $('#queryDate').val());	
-        //这里的第2个参数，$('#queryDate').val()根据不同情况决定如何使用，这个参数其实是控制是否要进行查询。因为对于jquery-bootgrid，如果查询参数与上次一样，是不会重新进行查询操作的。
+        //这里的第2个参数，$('#queryDate').val()根据不同情况决定如何使用，这个参数其实是控制是否要进行查询。
+	//因为对于jquery-bootgrid，如果查询参数与上次一样，是不会重新进行查询操作的。
         //如果希望不管查询参数是否改变，每次都进行查询，最简单的办法是传入一个随机数，或者当前时间
     });
 },
