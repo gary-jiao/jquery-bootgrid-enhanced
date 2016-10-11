@@ -70,6 +70,7 @@ Bootgrid默认只支持2种数据加载模式，一种是html直接渲染，一�
 ```javascript
 	
 	//根据项目需要，可以整理成任意想要的格式
+    //但是这里只处理了单字段排序的情况，如果开启了多字段排序功能，则需要自行处理
 	requestHandler: function (request) {
 	  if (request.sort) {
 	    request.sortBy = Object.keys(request.sort)[0]; //this only gets first sort param
